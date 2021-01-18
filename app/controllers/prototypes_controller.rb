@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!, except:[:index, :show]
+  before_action :authenticate_user!, except:[:index, :show, :edit]
   before_action :contributor_confirmation, only: [:edit]
   
   def index
@@ -58,7 +58,10 @@ class PrototypesController < ApplicationController
   end
 
   def contributor_confirmation
-    
+    unless user_signed_in?
+      redirect_to root_path 
+    end
   end
+  
 
 end
